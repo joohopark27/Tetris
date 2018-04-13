@@ -1,41 +1,37 @@
 package org.joohopark;
 
-import org.joohopark.Tetris;
-
-public class GameBoard {
+public class Tetris {
 	
-	private static final int ySIZE = 24;
-	private static final int xSIZE = 10;
-	public int[][] tile = new int[ySIZE][xSIZE];
+	private GameBoard space;
+	private GameBoard color;
+	public static Tetris game;
 	
-	public GameBoard(){
+	public Tetris(){
+	    
+		this.space = new GameBoard();
+		this.color = new GameBoard();
+	    
+	}
+	
+	public static void main(String[] args){
+	    
+		game = new Tetris();
 		
-	}
-	
-	public boolean isFilled(int y, int x){
-		if(tile[y][x] != 0){
-			return true;
+		for(int i = 0; i < game.space.tile[3].length; i++){
+		    game.space.tile[3][i] = 1;
 		}
-		return false;
-	}
-	
-	public void showBoard(){
-	    
-	    for(int[] y: tile){
-	        for(int x: y){
-	            System.out.print(x);
-	        }
-	        System.out.println();
-	    }
-	    
-	}
-	
-	public boolean rowFilled(int row, GameBoard board){
-		for(int x: this.tile[row]){
-		    if(!board.isFilled(row, x)){
-		        return false;
-		    }
+		
+		game.space.showBoard();
+		
+		for(int i = 0; i < game.space.tile.length; i++){
+		    System.out.println(game.space.rowFilled(i, game.space));
 		}
-		return true;
 	}
+	
+	//public void init(){}
+	
+	public void run(){
+	      
+	}
+	
 }
