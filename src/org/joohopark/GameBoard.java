@@ -17,22 +17,24 @@ public class GameBoard {
 		return false;
 	}
 	
-	public int[] checkFilled(){
-		int[] rows= new int[ySIZE];
-		
-		for(int i =0; i < ySIZE; i++){
-			boolean isFilled = true;
-			for(int j = 0; j < xSIZE; j++){
-				if(tile[i][j] == 0){
-					isFilled = false;
-					break;
-				}
-			}
-			if(isFilled){
-				rows[i] = 1;;
-			}
+	public void showBoard(){
+	    
+	    for(int[] y: tile){
+	        for(int x: y){
+	            System.out.print(x);
+	        }
+	        System.out.println();
+	    }
+	    
+	}
+	
+	public boolean rowFilled(int row, GameBoard board){
+		for(int x: this.tile[row]){
+		    if(!board.isFilled(row, x)){
+		        return false;
+		    }
 		}
-		return rows;
+		return true;
 	}
 		
 }
