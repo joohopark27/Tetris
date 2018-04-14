@@ -21,11 +21,23 @@ public class GameBoard {
 		return false;
 	}
 	
-	public void showBoard(){
+	public void showBoard(Piece piece){
 	    
-	    for(int[] y: tile){
-	        for(int x: y){
-	            System.out.print(x);
+	    for(int i = 0; i < tile.length; i++){
+	    	boolean yPosInrange = (piece.yPos >= i && piece.yPos - piece.height < i);
+	        for(int j = 0; j < tile[i].length; j++){
+		    	boolean xPosInrange = (piece.xPos + 1 >= j && piece.xPos - piece.width + 1 < j);
+		    	int block;
+		    	if(yPosInrange && xPosInrange){
+		    		block = piece.getPart(j - piece.xPos, piece.yPos - i);
+	        	}else{
+	        		block = 0;
+	        	}
+	        	if(block != 0){
+	        		System.out.print(block);
+	        	}else{
+	        		System.out.print(tile[i][j]);
+	        	}
 	        }
 	        System.out.println();
 	    }
@@ -41,10 +53,4 @@ public class GameBoard {
 		return true;
 	}
 	
-	public void createPiece(Piece piece){
-		
-		
-		
-	}
-		
 }
