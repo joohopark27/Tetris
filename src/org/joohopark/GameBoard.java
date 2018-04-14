@@ -4,10 +4,14 @@ public class GameBoard {
 	
 	private static final int ySIZE = 24;
 	private static final int xSIZE = 10;
-	private int[][] tile = new int[ySIZE][xSIZE];
+	public int[][] tile = new int[ySIZE][xSIZE];
 	
-	public GameBoard(){
+	private JPTetris tetris;
+	
+	public GameBoard(JPTetris tetris){
 		
+		this.tetris = tetris;
+
 	}
 	
 	public boolean isFilled(int y, int x){
@@ -35,6 +39,12 @@ public class GameBoard {
 		    }
 		}
 		return true;
+	}
+	
+	public void createPiece(Piece piece){
+		
+		
+		
 	}
 		
 }
