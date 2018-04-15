@@ -15,17 +15,22 @@ public class GameBoard {
 	}
 	
 	public void showBoard(Piece piece){
+		
+	    System.out.println();
 	    
-	    for(int i = 0; i < tile.length; i++){
-	    	boolean yPosInrange = (piece.yPos >= i && piece.yPos - piece.height < i);
+	    for(int i = 3; i < tile.length; i++){
+	    	boolean yPosInrange = (piece.yPos + piece.height > i && piece.yPos <= i);
+	    	
 	        for(int j = 0; j < tile[i].length; j++){
 		    	boolean xPosInrange = (j - piece.xPos >= 0 && j - piece.xPos < piece.width);
 		    	int block;
+		    	
 		    	if(yPosInrange && xPosInrange){
-		    		block = piece.getPart(j - piece.xPos, piece.yPos - i);
+		    		block = piece.getPart(j - piece.xPos, i - piece.yPos);
 	        	}else{
 	        		block = 0;
 	        	}
+		    	
 	        	if(block != 0){
 	        		System.out.print(block);
 	        	}else{
@@ -34,7 +39,6 @@ public class GameBoard {
 	        }
 	        System.out.println();
 	    }
-	    System.out.println();
 	    
 	}
 
@@ -60,6 +64,7 @@ public class GameBoard {
 	public boolean checkGameOver(){
 		for(int x: this.tile[3]){
 		    if(this.isFilled(3, x)){
+		    	System.out.println("game over");
 		        return true;
 		    }
 		}

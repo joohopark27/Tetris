@@ -24,8 +24,6 @@ public class Piece {
 	
 	public void createPiece(int type){
 		
-		this.yPos = 3;
-		
 		switch(type){
 			case 0:			//I
 				this.block = new int[][] {{0,0,0,0}, {0,0,0,0}, {0,0,0,0}, {1,1,1,1}};
@@ -58,25 +56,28 @@ public class Piece {
 		}
 		this.height = block.length;
 		this.width = block[height -1].length;
+		this.yPos = 4 - this.height;
 	}
 
 	//checks if there is space on the bottom
-	public boolean checkDown(int x){
+	public boolean checkDown(){
 		
-		if(yPos == 23){
+		if(yPos == 24 - height){
 			isFalling = false;
 			return false;
 		}
 		
-		for(int i =0; i < width; i++){
-			for(int j = 1; j <= height && block[height - j][i] == 0; j++){
-				System.out.println(block[height - j][i] != 0 );
-				System.out.println(board.isFilled(yPos + 2 - j, x + i));
-				if(block[height - j][i] != 0 && board.isFilled(yPos + 2 - j, x + i)){
+		for(int x = 0; x < width; x++){
+			int y = 0;
+			
+			/*for(int y = 1; y <= height && block[height - y][x] == 0; y++){
+				System.out.println(block[height - y][x] != 0);
+				System.out.println(board.isFilled(yPos + 2 - y, xPos + x));
+				if(block[height - y][x] != 0 && board.isFilled(yPos + 2 - y, xPos + x)){
 					isFalling = false;
 					return false;
 				}
-			}
+			}*/
 		}
 		return true;
 	}
@@ -90,7 +91,7 @@ public class Piece {
 		
 		for(int i = 0; i < height ; i++){
 			for(int j = 0; block[i][j] == 0 && j < width; j++){
-				if(!(block[i][j] != 0 && board.isFilled(yPos - height + 1 - i, xPos + j - 1))){
+				if(!(block[i][j] != 0 && board.isFilled(i, xPos + j - 1))){
 					return false;
 				}
 			}
@@ -107,7 +108,7 @@ public class Piece {
 		
 		for(int i = 0; i < height ; i++){
 			for(int j = width - 1; block[i][j] == 0 && j >= 0; j++){
-				if(!(block[i][j] != 0 && board.isFilled(yPos - height + 1 - i, xPos + j + 1))){
+				if(!(block[i][j] != 0 && board.isFilled(i, xPos + j + 1))){
 					return false;
 				}
 			}
@@ -118,7 +119,7 @@ public class Piece {
 	//public boolean checkRotate(){}
 	
 	public int getPart(int x, int y){
-		return block[height - 1 - y][x];
+		return block[y][x];
 	}
 	
 }

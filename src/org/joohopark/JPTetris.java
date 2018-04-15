@@ -27,10 +27,15 @@ public class JPTetris {
 			nextPiece = new Piece(this, this.space, (int)(Math.random() * 7));
 
 			space.showBoard(currentPiece);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
 			if(currentPiece.isFalling){
 				currentPiece.yPos += 1;
-				currentPiece.checkDown(currentPiece.xPos);
+				currentPiece.checkDown();
 			}else{
 
 				isGameOver = true;
@@ -56,7 +61,7 @@ public class JPTetris {
 		JPTetris game = new JPTetris();
 		
 		for(int i = 0; i < game.space.tile[3].length; i++){
-			game.space.tile[23][i] = 1;
+			game.space.tile[15][i] = 1;
 		}
 		
 		game.run();
