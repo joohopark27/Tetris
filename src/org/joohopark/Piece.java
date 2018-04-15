@@ -8,14 +8,12 @@ public class Piece {
 	public int width, height;
 	
 	private JPTetris tetris;
-	private GameBoard board;
 	
 	public boolean isFalling;
 	
-	public Piece(JPTetris tetris,GameBoard board, int type){
+	public Piece(JPTetris tetris, int type){
 		
 		this.tetris = tetris;
-		this.board = board;
 		
 		this.isFalling = true;
 		
@@ -60,16 +58,24 @@ public class Piece {
 	}
 
 	//checks if there is space on the bottom
-	public boolean checkDown(){
+	public boolean checkDown(GameBoard board){
 		
 		if(yPos == 24 - height){
 			isFalling = false;
 			return false;
 		}
 		
-		for(int x = 0; x < width; x++){
-			int y = 0;
+		for(int x = 0; x < width; x++){ //checks for each colum
+			int y = height - 1;
 			
+			while(block[y][x] == 0 && y > 0){ // runs until space is ocupide
+				y--;
+			}
+			
+			if(block[y][x] != 0 && board.isFilled(yPos + y + 1, xPos + x)){
+				isFalling = false;
+				return false;
+			}
 			/*for(int y = 1; y <= height && block[height - y][x] == 0; y++){
 				System.out.println(block[height - y][x] != 0);
 				System.out.println(board.isFilled(yPos + 2 - y, xPos + x));
@@ -83,7 +89,7 @@ public class Piece {
 	}
 	
 	//checks if there is space on the left
-	public boolean checkLeft(){
+	public boolean checkLeft(GameBoard board){
 		
 		if(xPos == 0){
 			return false;
@@ -100,7 +106,7 @@ public class Piece {
 	}
 	
 	//checks if there is space on the right
-	public boolean checkRight(){
+	public boolean checkRight(GameBoard board){
 		
 		if(xPos == 10 - width){
 			return false;

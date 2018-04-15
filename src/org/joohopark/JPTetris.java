@@ -14,7 +14,7 @@ public class JPTetris {
 
 		this.space = new GameBoard(this);
 		this.color = new GameBoard(this);
-		this.currentPiece = new Piece(this, this.space, 6);
+		this.currentPiece = new Piece(this, (int)(Math.random() * 7));
 		
 	}
 	
@@ -22,36 +22,38 @@ public class JPTetris {
 	
 	public void run(){
 		
+		nextPiece = new Piece(this, (int)(Math.random() * 7));
+		
 		while(!isGameOver){
 
-			nextPiece = new Piece(this, this.space, (int)(Math.random() * 7));
-
 			space.showBoard(currentPiece);
+			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			
 			if(currentPiece.isFalling){
 				currentPiece.yPos += 1;
-				currentPiece.checkDown();
-			}else{
-
-				isGameOver = true;
+				currentPiece.checkDown(space);
+			}else{ //if piece has stopped moving
+				
 				space.addToBoard(currentPiece);
 				
 				if(space.checkGameOver()){
 					isGameOver = true;
 				}
 				
-				for(int i = 0; i < space.tile.length; i++){
+				for(int i = 5; i < space.tile.length; i++){
 					if(space.rowFilled(i)){
 						System.out.println(i);
 					}
 				}
+				
 				currentPiece = nextPiece;
-				nextPiece = new Piece(this, this.space, (int) Math.random() * 7);
+				nextPiece = new Piece(this, (int) (Math.random() * 7));
+				currentPiece.checkDown(space);
 			}
 		}
 	}
@@ -59,10 +61,6 @@ public class JPTetris {
 	public static void main(String[] args){
 	    
 		JPTetris game = new JPTetris();
-		
-		for(int i = 0; i < game.space.tile[3].length; i++){
-			game.space.tile[15][i] = 1;
-		}
 		
 		game.run();
 		System.out.println("done");
