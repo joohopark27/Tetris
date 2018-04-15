@@ -26,7 +26,7 @@ public class GameBoard {
 	    for(int i = 0; i < tile.length; i++){
 	    	boolean yPosInrange = (piece.yPos >= i && piece.yPos - piece.height < i);
 	        for(int j = 0; j < tile[i].length; j++){
-		    	boolean xPosInrange = (piece.xPos + 1 >= j && piece.xPos - piece.width + 1 < j);
+		    	boolean xPosInrange = (j - piece.xPos >= 0 && j - piece.xPos < piece.width);
 		    	int block;
 		    	if(yPosInrange && xPosInrange){
 		    		block = piece.getPart(j - piece.xPos, piece.yPos - i);
@@ -41,6 +41,7 @@ public class GameBoard {
 	        }
 	        System.out.println();
 	    }
+	    System.out.println();
 	    
 	}
 	
@@ -51,6 +52,10 @@ public class GameBoard {
 		    }
 		}
 		return true;
+	}
+	
+	public void addToBoard(Piece piece){
+		
 	}
 	
 }

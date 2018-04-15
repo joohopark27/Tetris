@@ -23,23 +23,34 @@ public class JPTetris {
 	public void run(){
 		
 		while(!isGameOver){
+
+			nextPiece = new Piece(this, this.space, (int)(Math.random() * 7));
+
+			space.showBoard(currentPiece);
 			
-			for(int i = 0; i < space.tile.length; i++){
-			    if(space.rowFilled(i, space)){
-			    	
-			    }
+			if(currentPiece.isFalling){
+				currentPiece.yPos += 1;
+				currentPiece.checkDown(currentPiece.xPos);
+			}else{
+				
+				isGameOver = true;
+				for(int i = 0; i < space.tile.length; i++){
+					if(space.rowFilled(i, space)){
+						System.out.println(i);
+					}
+				}
+				currentPiece = nextPiece;
+				nextPiece = new Piece(this, this.space, (int) Math.random() * 7);
 			}
-			
+
 		}
-		
 	}
 	
 	public static void main(String[] args){
 	    
 		JPTetris game = new JPTetris();
 		
-		game.space.showBoard(game.currentPiece);
-		
+		game.run();
 	}
 	
 }
