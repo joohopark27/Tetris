@@ -42,7 +42,7 @@ public class GameBoard {
 	    }
 	    
 	}
-
+	
 	//checks for one tile
 	public boolean isFilled(int y, int x){
 		if(tile[y][x] != 0){
@@ -53,7 +53,7 @@ public class GameBoard {
 	
 	//checks if whole lane is filled
 	public boolean rowFilled(int row){
-		for(int x: this.tile[row]){
+		for(int x = 0; x < this.tile[row].length; x++){
 		    if(!this.isFilled(row, x)){
 		        return false;
 		    }
@@ -63,7 +63,7 @@ public class GameBoard {
 	
 	//return true if gameover
 	public boolean checkGameOver(){
-		for(int x: this.tile[3]){
+		for(int x = 0; x < this.tile[3].length; x++){
 		    if(this.isFilled(3, x)){
 		    	System.out.println("game over");
 		        return true;
