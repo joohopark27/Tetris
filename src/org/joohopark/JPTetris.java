@@ -32,17 +32,22 @@ public class JPTetris {
 				currentPiece.yPos += 1;
 				currentPiece.checkDown(currentPiece.xPos);
 			}else{
-				
+
 				isGameOver = true;
+				space.addToBoard(currentPiece);
+				
+				if(space.checkGameOver()){
+					isGameOver = true;
+				}
+				
 				for(int i = 0; i < space.tile.length; i++){
-					if(space.rowFilled(i, space)){
+					if(space.rowFilled(i)){
 						System.out.println(i);
 					}
 				}
 				currentPiece = nextPiece;
 				nextPiece = new Piece(this, this.space, (int) Math.random() * 7);
 			}
-
 		}
 	}
 	
@@ -50,7 +55,13 @@ public class JPTetris {
 	    
 		JPTetris game = new JPTetris();
 		
+		for(int i = 0; i < game.space.tile[3].length; i++){
+			game.space.tile[23][i] = 1;
+		}
+		
 		game.run();
+		System.out.println("done");
+		
 	}
 	
 }

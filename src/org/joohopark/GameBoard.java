@@ -14,13 +14,6 @@ public class GameBoard {
 
 	}
 	
-	public boolean isFilled(int y, int x){
-		if(tile[y][x] != 0){
-			return true;
-		}
-		return false;
-	}
-	
 	public void showBoard(Piece piece){
 	    
 	    for(int i = 0; i < tile.length; i++){
@@ -44,18 +37,44 @@ public class GameBoard {
 	    System.out.println();
 	    
 	}
+
+	//checks for one tile
+	public boolean isFilled(int y, int x){
+		if(tile[y][x] != 0){
+			return true;
+		}
+		return false;
+	}
 	
-	public boolean rowFilled(int row, GameBoard board){
+	//checks if whole lane is filled
+	public boolean rowFilled(int row){
 		for(int x: this.tile[row]){
-		    if(!board.isFilled(row, x)){
+		    if(!this.isFilled(row, x)){
 		        return false;
 		    }
 		}
 		return true;
 	}
 	
+	//return true if gameover
+	public boolean checkGameOver(){
+		for(int x: this.tile[3]){
+		    if(this.isFilled(3, x)){
+		        return true;
+		    }
+		}
+		return false;
+	}
+	
+	
 	public void addToBoard(Piece piece){
-		
+		for(int i = 0; i < piece.height; i++){
+			for(int j = 0; j < piece.width; j++){
+				if(piece.getPart(j, i) != 0){
+					this.tile[piece.yPos - piece.height + 1 + i][piece.xPos + j] = piece.getPart(j, i);
+				}
+			}
+		}
 	}
 	
 }

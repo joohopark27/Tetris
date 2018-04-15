@@ -70,6 +70,8 @@ public class Piece {
 		
 		for(int i =0; i < width; i++){
 			for(int j = 1; j <= height && block[height - j][i] == 0; j++){
+				System.out.println(block[height - j][i] != 0 );
+				System.out.println(board.isFilled(yPos + 2 - j, x + i));
 				if(block[height - j][i] != 0 && board.isFilled(yPos + 2 - j, x + i)){
 					isFalling = false;
 					return false;
