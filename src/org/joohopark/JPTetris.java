@@ -10,6 +10,13 @@ public class JPTetris {
 	
 	private boolean isGameOver = false;
 	
+	private int level,
+	            score;
+    
+	private enum scoreReason {
+	    SOFTDROP, HARDDROP, LINECLEAR;
+	}
+	
 	public JPTetris(){
 
 		this.space = new GameBoard(this);
@@ -18,11 +25,48 @@ public class JPTetris {
 		
 	}
 	
-	//public void init(){}
+	public void init(){
+	    
+	    nextPiece = new Piece(this, (int)(Math.random() * 7));
+	    
+	    score = 0;
+	    level = 0;
+	    
+	}
+	
+	public int score(scoreReson reason, int lines){
+	    int points = 0;
+	    
+	    switch(reason) {
+	        case SOFTDROP://1point per line dropped
+	            points += 1;
+	            break;
+	        case HARDDROP://2 points per line dropped
+	            points += 2 * lines;
+	            break:
+	        case LINECLEAR:// level n: 1 line: 40 * (n + 1),	two line: 100 * (n + 1)	   three line: 300 * (n + 1)	Tetris: 1200 * (n + 1)
+	            if(lines == 1){
+	                points += 40 * (level + 1);
+	            }else if(lines >= 2){
+	                points += 100 * (level + 1);
+	                if(lines >= 3){
+	                    points *= 3
+	                    if(lines == 4){
+	                        points *= 4
+	                    }
+	                }
+	            }else{
+	                System.out.println("bug in score system");
+	            }
+	    }
+	    
+	    return points;
+	    
+	}
 	
 	public void run(){
 		
-		nextPiece = new Piece(this, (int)(Math.random() * 7));
+		init();
 		
 		while(!isGameOver){
 
