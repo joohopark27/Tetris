@@ -89,10 +89,16 @@ public class JPTetris {
 					isGameOver = true;
 				}
 				
-				for(int i = 5; i < space.tile.length; i++){
+				int linesCleared = 0;
+				for(int i = 4; i < space.tile.length; i++){
 					if(space.rowFilled(i)){
 						System.out.println(i);
+						linesCleared++;
 					}
+				}
+				
+				if(linesCleared != 0){
+				    score(LINECLEAR, linesCleared);
 				}
 				
 				currentPiece = nextPiece;
