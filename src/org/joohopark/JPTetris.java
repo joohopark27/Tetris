@@ -43,16 +43,16 @@ public class JPTetris {
 	            break;
 	        case HARDDROP://2 points per line dropped
 	            points += 2 * lines;
-	            break:
+	            break;
 	        case LINECLEAR:// level n: 1 line: 40 * (n + 1),	two line: 100 * (n + 1)	   three line: 300 * (n + 1)	Tetris: 1200 * (n + 1)
 	            if(lines == 1){
 	                points += 40 * (level + 1);
 	            }else if(lines >= 2){
 	                points += 100 * (level + 1);
 	                if(lines >= 3){
-	                    points *= 3
+	                    points *= 3;
 	                    if(lines == 4){
-	                        points *= 4
+	                        points *= 4;
 	                    }
 	                }
 	            }else{
