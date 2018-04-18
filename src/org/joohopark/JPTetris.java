@@ -5,6 +5,7 @@ public class JPTetris {
 	private GameBoard space;
 	private GameBoard color;
 	private Piece nextPiece;
+	private Clock timer;
 	
 	public Piece currentPiece;
 	
@@ -18,10 +19,11 @@ public class JPTetris {
 	}
 	
 	public JPTetris(){
-
+        
 		this.space = new GameBoard(this);
 		this.color = new GameBoard(this);
 		this.currentPiece = new Piece(this, (int)(Math.random() * 7));
+		this.timer = new Clock();
 		
 	}
 	
@@ -34,7 +36,7 @@ public class JPTetris {
 	    
 	}
 	
-	public int score(scoreReson reason, int lines){
+	public int score(scoreReason reason, int lines){
 	    int points = 0;
 	    
 	    switch(reason) {
@@ -69,8 +71,16 @@ public class JPTetris {
 		init();
 		
 		while(!isGameOver){
-
-			space.showBoard(currentPiece);
+            
+            timer.getTime();
+            //update();
+			
+		}
+	}
+	
+	public void update(){
+	    
+	    space.showBoard(currentPiece);
 			
 			try {
 				Thread.sleep(100);
@@ -98,14 +108,14 @@ public class JPTetris {
 				}
 				
 				if(linesCleared != 0){
-				    score(LINECLEAR, linesCleared);
+				    score(scoreReason.LINECLEAR, linesCleared);
 				}
 				
 				currentPiece = nextPiece;
 				nextPiece = new Piece(this, (int) (Math.random() * 7));
 				currentPiece.checkDown(space);
 			}
-		}
+	    
 	}
 	
 	public static void main(String[] args){
