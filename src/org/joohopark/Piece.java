@@ -58,11 +58,14 @@ public class Piece {
 	}
 
 	//checks if there is space on the bottom
-	public boolean checkDown(GameBoard board){
+	public boolean checkDown(GameBoard board, int yPos){
 		
-		if(yPos == 24 - height){
-			isFalling = false;
-			return false;
+		a: for(int y = height - 1; y >= 0; y++){
+			for(int x = 0; x < width; x++){
+				if(block[y][x] != 0){
+					if()
+				}
+			}
 		}
 		
 		for(int x = 0; x < width; x++){ //checks for each colum
@@ -73,17 +76,8 @@ public class Piece {
 			}
 			
 			if(block[y][x] != 0 && board.isFilled(yPos + y + 1, xPos + x)){
-				isFalling = false;
 				return false;
 			}
-			/*for(int y = 1; y <= height && block[height - y][x] == 0; y++){
-				System.out.println(block[height - y][x] != 0);
-				System.out.println(board.isFilled(yPos + 2 - y, xPos + x));
-				if(block[height - y][x] != 0 && board.isFilled(yPos + 2 - y, xPos + x)){
-					isFalling = false;
-					return false;
-				}
-			}*/
 		}
 		return true;
 	}
@@ -122,8 +116,6 @@ public class Piece {
 		return true;
 	}
 
-	//public boolean checkRotate(){}
-	
 	public int getPart(int x, int y){
 		return block[y][x];
 	}
