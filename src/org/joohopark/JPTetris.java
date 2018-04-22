@@ -34,29 +34,30 @@ public class JPTetris {
 	    
 	}
 	
-	public int score(scoreReson reason, int lines){
+	public int score(scoreReason reason, int lines){
 	    int points = 0;
 	    
 	    switch(reason) {
-	        case SOFTDROP://1point per line dropped
-	            points += 1;
-	            break;
-	        case HARDDROP://2 points per line dropped
-	            points += 2 * lines;
+	        case HARDDROP://2 point per line dropped
+	            points += 1 * lines;
+	        case SOFTDROP://1 points per line dropped
+	            points += 1 * lines;
 	            break;
 	        case LINECLEAR:// level n: 1 line: 40 * (n + 1),	two line: 100 * (n + 1)	   three line: 300 * (n + 1)	Tetris: 1200 * (n + 1)
-	            if(lines == 1){
-	                points += 40 * (level + 1);
-	            }else if(lines >= 2){
-	                points += 100 * (level + 1);
-	                if(lines >= 3){
-	                    points *= 3;
-	                    if(lines == 4){
-	                        points *= 4;
-	                    }
-	                }
-	            }else{
-	                System.out.println("bug in score system");
+	            points = 1;
+	        	switch(lines) {
+	            	case 1:
+		                points *= 40 * (level + 1);
+	            		break;
+	            	case 4:
+	            		points *= 4;
+	            	case 3:
+	            		points *= 3;
+	            	case 2:
+	            		points *= 100 * (level + 1);
+	            		break;
+	            	default:
+	            		System.out.println("bug in score system");
 	            }
 	    }
 	    
@@ -98,7 +99,7 @@ public class JPTetris {
 				}
 				
 				if(linesCleared != 0){
-				    score(LINECLEAR, linesCleared);
+				    score(scoreReason.LINECLEAR, linesCleared);
 				}
 				
 				currentPiece = nextPiece;
