@@ -13,10 +13,10 @@ public class Input implements KeyListener{
 	}
 	
 	public void keyPressed(){
-		down = keyInput[KeyEvent.VK_S];
-		left = keyInput[KeyEvent.VK_A];
-		right = keyInput[KeyEvent.VK_D];
-		space = keyInput[KeyEvent.VK_SPACE];
+		down = keyInput[KeyEvent.VK_S];//39
+		left = keyInput[KeyEvent.VK_A];//37
+		right = keyInput[KeyEvent.VK_D];//40
+		space = keyInput[KeyEvent.VK_SPACE];//32
 	}
 
 	@Override
