@@ -10,7 +10,7 @@ public class JPTetris {
 	
 	public Piece currentPiece;
 	
-	private boolean isGameOver = false;
+	private boolean isRunning;
 	
 	private int level,
 	            score;
@@ -34,6 +34,7 @@ public class JPTetris {
 		this.screen = new Screen();
 	    nextPiece = new Piece(this, (int)(Math.random() * 7));
 	    
+	    isRunning = true;
 	    score = 0;
 	    gravity = 1D / 120D;
 	    level = 0;
@@ -44,7 +45,7 @@ public class JPTetris {
 		
 		init();
 		
-		while(!isGameOver){
+		while(isRunning){
             
             if(time.timer()){
             	update();
@@ -52,31 +53,33 @@ public class JPTetris {
 		}
 	}
 	
+	public void render(){
+	}
+
 	public void update(){
+		
+	    space.getBoard(currentPiece);
 	    
-	    space.showBoard(currentPiece);
 	    if(time.gravity(gravity)){
 	    	fall();
 	    }
+	    
 	}
 	
 	public void fall(){
 		
-		if(currentPiece.checkDown(space)){
+		if(currentPiece.checkDown(space, currentPiece.yPos)){
 			currentPiece.yPos += 1;
 		}else{ //if piece has stopped moving
 			currentPiece.isFalling = false;
 			endFall();
 		}
+		
 	}
 	
 	public void endFall(){
 		
 		space.addToBoard(currentPiece);
-		
-		if(space.checkGameOver()){
-			isGameOver = true;
-		}
 		
 		int linesCleared = 0;
 		for(int i = 4; i < space.tile.length; i++){
@@ -92,8 +95,10 @@ public class JPTetris {
 		
 		currentPiece = nextPiece;
 		nextPiece = new Piece(this, (int) (Math.random() * 7));
-		currentPiece.checkDown(space);
 		
+		if(space.checkGameOver()){
+			isRunning = false;
+		}
 	}
 
 	public int score(scoreReason reason, int lines){

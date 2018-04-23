@@ -28,27 +28,27 @@ public class Piece {
 				this.xPos = 3;
 				break;
 			case 1:			//O
-				this.block = new int[][] {{1,1}, {1,1}};
+				this.block = new int[][] {{2,2}, {2,2}};
 				this.xPos = 4;
 				break;
 			case 2:			//T
-				this.block = new int[][] {{0,0,0}, {0,1,0}, {1,1,1}};
+				this.block = new int[][] {{0,0,0}, {0,3,0}, {3,3,3}};
 				this.xPos = 3;
 				break;
 			case 3:			//S
-				this.block = new int[][] {{0,0,0}, {0,1,1}, {1,1,0}};
+				this.block = new int[][] {{0,0,0}, {0,4,4}, {4,4,0}};
 				this.xPos = 3;
 				break;
 			case 4:			//Z
-				this.block = new int[][] {{0,0,0}, {1,1,0}, {0,1,1}};
+				this.block = new int[][] {{0,0,0}, {5,5,0}, {0,5,5}};
 				this.xPos = 3;
 				break;	
 			case 5:			//J
-				this.block = new int[][] {{0,0,1}, {0,0,1}, {0,1,1}};
+				this.block = new int[][] {{0,0,6}, {0,0,6}, {0,6,6}};
 				this.xPos = 4;
 				break;
 			case 6:			//L
-				this.block = new int[][] {{1,0,0}, {1,0,0}, {1,1,0}};
+				this.block = new int[][] {{7,0,0}, {7,0,0}, {7,7,0}};
 				this.xPos = 4;
 				break;
 		}
@@ -63,7 +63,11 @@ public class Piece {
 		a: for(int y = height - 1; y >= 0; y++){
 			for(int x = 0; x < width; x++){
 				if(block[y][x] != 0){
-					if()
+					if(yPos + y == 24){
+						return false;
+					}else{
+						break a;
+					}
 				}
 			}
 		}

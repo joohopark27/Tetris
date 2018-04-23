@@ -14,7 +14,8 @@ public class GameBoard {
 
 	}
 	
-	public void showBoard(Piece piece){
+	public int[][] getBoard(Piece piece){
+		int[][] board = new int[ySIZE][xSIZE];
 		
 	    System.out.println();
 	    
@@ -33,14 +34,14 @@ public class GameBoard {
 	        	}
 		    	
 	        	if(block != 0){
-	        		System.out.print(block);
+	        		board[i][j] = block;
 	        	}else{
-	        		System.out.print(tile[i][j]);
+	        		board[i][j] = tile[i][j];
 	        	}
 	        }
 	        System.out.println();
 	    }
-	    
+	    return board;
 	}
 	
 	//checks for one tile
@@ -59,6 +60,14 @@ public class GameBoard {
 		    }
 		}
 		return true;
+	}
+	
+	public void removeRow(int row){
+		for(int i = row; i > 3; i++){
+			for(int j =0; j < xSIZE; j++){
+				tile[i][j] = tile[i - 1][j];
+			}
+		}
 	}
 	
 	//return true if gameover
