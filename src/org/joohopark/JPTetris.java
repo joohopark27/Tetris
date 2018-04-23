@@ -7,6 +7,7 @@ public class JPTetris {
 	private Piece nextPiece;
 	private Clock time;
 	private Screen screen;
+	private Input keyboard;
 	
 	public Piece currentPiece;
 	
@@ -25,6 +26,7 @@ public class JPTetris {
 		this.space = new GameBoard(this);
 		this.color = new GameBoard(this);
 		this.currentPiece = new Piece(this, (int)(Math.random() * 7));
+		this.keyboard = new Input();
 		
 	}
 	
@@ -48,6 +50,7 @@ public class JPTetris {
 		while(isRunning){
             
             if(time.timer()){
+            	keyboard.keyPressed();
             	update();
             }
 		}
@@ -59,6 +62,8 @@ public class JPTetris {
 	public void update(){
 		
 	    space.getBoard(currentPiece);
+	    
+	    if90
 	    
 	    if(time.gravity(gravity)){
 	    	fall();
