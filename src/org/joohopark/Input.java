@@ -7,11 +7,23 @@ public class Input implements KeyListener{
 	
 	public boolean down, left, right, space;
 	
+<<<<<<< HEAD
 	public Input() {
 		down = false;
 		left = false;
 		right = false;
 		space = false;
+=======
+	public Input(){
+		keyInput = new boolean[256];
+	}
+	
+	public void keyPressed(){
+		down = keyInput[KeyEvent.VK_S];//39
+		left = keyInput[KeyEvent.VK_A];//37
+		right = keyInput[KeyEvent.VK_D];//40
+		space = keyInput[KeyEvent.VK_SPACE];//32
+>>>>>>> 6312f280b4bd86aea0da5a92d67009832d8a47af
 	}
 
 	@Override
