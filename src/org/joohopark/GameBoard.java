@@ -16,8 +16,6 @@ public class GameBoard {
 	
 	public int[][] getBoard(Piece piece){
 		int[][] board = new int[ySIZE][xSIZE];
-		
-	    System.out.println();
 	    
 	    for(int i = 0; i < tile.length; i++){
 	    	boolean yPosInrange = (piece.yPos + piece.height > i && piece.yPos <= i);
@@ -39,7 +37,6 @@ public class GameBoard {
 	        		board[i][j] = tile[i][j];
 	        	}
 	        }
-	        System.out.println();
 	    }
 	    return board;
 	}

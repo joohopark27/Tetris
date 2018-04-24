@@ -1,9 +1,8 @@
 package org.joohopark;
 
-public class JPTetris {
+public class JPTetris{
 	
 	private GameBoard space;
-	private GameBoard color;
 	private Piece nextPiece;
 	private Clock time;
 	private Screen screen;
@@ -24,17 +23,18 @@ public class JPTetris {
 	public JPTetris(){
         
 		this.space = new GameBoard(this);
-		this.color = new GameBoard(this);
 		this.currentPiece = new Piece(this, (int)(Math.random() * 7));
-		this.keyboard = new Input();
+		keyboard = new Input();
+		screen = new Screen();
 		
 	}
 	
 	public void init(){
 
 		this.time = new Clock();
-		this.screen = new Screen();
 	    nextPiece = new Piece(this, (int)(Math.random() * 7));
+	    
+	    screen.getFrame().addKeyListener(keyboard);
 	    
 	    isRunning = true;
 	    score = 0;
@@ -50,20 +50,16 @@ public class JPTetris {
 		while(isRunning){
             
             if(time.timer()){
-            	keyboard.keyPressed();
             	update();
             }
 		}
 	}
-	
-	public void render(){
-	}
 
 	public void update(){
 		
+		screen.updateScreen();
+		
 	    space.getBoard(currentPiece);
-	    
-	    if90
 	    
 	    if(time.gravity(gravity)){
 	    	fall();
@@ -110,25 +106,25 @@ public class JPTetris {
 		int points = 0;
 	    
 	    switch(reason) {
-	        case HARDDROP://2 point per line dropped
-	            points += 1 * lines;
-	        case SOFTDROP://1 points per line dropped
-	            points += 1 * lines;
-	            break;
-	        case LINECLEAR:// level n: 1 line: 40 * (n + 1),	two line: 100 * (n + 1)	   three line: 300 * (n + 1)	Tetris: 1200 * (n + 1)
-	            points = 1;
-	        	switch(lines) {
-	            	case 1:
-		                points *= 40 * (level + 1);
-	            		break;
-	            	case 4:
-	            		points *= 4;
-	            	case 3:
-	            		points *= 3;
-	            	case 2:
-	            		points *= 100 * (level + 1);
-	            		break;
-	            }
+        case HARDDROP://2 point per line dropped
+            points += 1 * lines;
+        case SOFTDROP://1 points per line dropped
+            points += 1 * lines;
+            break;
+        case LINECLEAR:// level n: 1 line: 40 * (n + 1),	two line: 100 * (n + 1)	   three line: 300 * (n + 1)	Tetris: 1200 * (n + 1)
+            points = 1;
+        	switch(lines) {
+        	case 1:
+                points *= 40 * (level + 1);
+        		break;
+        	case 4:
+        		points *= 4;
+        	case 3:
+        		points *= 3;
+        	case 2:
+        		points *= 100 * (level + 1);
+        		break;
+            }
 	    }
 	    
 	    return points;
