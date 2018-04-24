@@ -1,5 +1,7 @@
 package org.joohopark;
 
+import java.io.IOException;
+
 public class JPTetris{
 	
 	private GameBoard space;
@@ -7,6 +9,7 @@ public class JPTetris{
 	private Clock time;
 	private Screen screen;
 	private Input keyboard;
+	private SpriteSheet tile;
 	
 	public Piece currentPiece;
 	
@@ -20,12 +23,13 @@ public class JPTetris{
 	    SOFTDROP, HARDDROP, LINECLEAR;
 	}
 	
-	public JPTetris(){
+	public JPTetris() throws IOException{
         
 		this.space = new GameBoard(this);
 		this.currentPiece = new Piece(this, (int)(Math.random() * 7));
 		keyboard = new Input();
-		screen = new Screen();
+		tile = new SpriteSheet();
+		screen = new Screen(tile);
 		
 	}
 	
@@ -57,7 +61,7 @@ public class JPTetris{
 
 	public void update(){
 		
-		screen.updateScreen();
+		screen.updateScreen(space.getBoard(currentPiece));
 		
 	    space.getBoard(currentPiece);
 	    
@@ -91,7 +95,7 @@ public class JPTetris{
 		}
 		
 		if(linesCleared != 0){
-		    score(scoreReason.LINECLEAR, linesCleared);
+		    score += score(scoreReason.LINECLEAR, linesCleared);
 		}
 		
 		currentPiece = nextPiece;
@@ -131,7 +135,7 @@ public class JPTetris{
 	    
 	}
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 	    
 		JPTetris game = new JPTetris();
 		

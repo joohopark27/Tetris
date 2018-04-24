@@ -2,10 +2,9 @@ package org.joohopark;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
@@ -15,19 +14,21 @@ public class Screen extends Canvas{
 	
 	private JFrame frame;
 	private Canvas canvas;
-	private BufferedImage image;
 	
-	private int[] pixels;
+	private SpriteSheet tile;
+	
+	private BufferStrategy bs;
+	private Graphics g;
 
 	public static final int SCALE = 8 * 3;
 	public static final int WIDTH = 10 * SCALE;
 	public static final int HEIGHT = 24 * SCALE;
 	public static final String GAMENAME = "Tetris";
 	
-	public Screen(){
+	public Screen(SpriteSheet tile){
 		
-		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+		this.tile = tile;
+		
 		frame = new JFrame(GAMENAME);
 		this.frame = new JFrame(GAMENAME);
 		this.frame.setSize(WIDTH, HEIGHT );
@@ -35,20 +36,38 @@ public class Screen extends Canvas{
 		this.frame.setResizable(false);
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
-	
+		
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
+		canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+
+		frame.add(canvas);
+		frame.pack();
+		
 	}
 	
-	public void updateScreen(){
-//		BufferStrategy bs = getBufferStrategy();
-//		if(bs == null){
-//			createBufferStrategy(3);
-//			return;
-//		}
-//		
-//		Graphics g = bs.getDrawGraphics();
-//		
-//		g.setColor(Color.BLACK);
-//		
+	public void updateScreen(int[][] board){
+		
+		bs = canvas.getBufferStrategy();
+		if(bs == null){
+			canvas.createBufferStrategy(3);
+			return;
+		}
+		
+		g = bs.getDrawGraphics();
+		
+		g.clearRect(0, 0, WIDTH, HEIGHT);
+		
+		for(int y = 4; y < 24; y++){
+			for(int x = 0; x < 10; x++){
+				g.drawImage(tile.getBlock(board[y][x]), x * SCALE, (y - 4) * SCALE, SCALE * 8, SCALE * 8, null);
+			}
+		}
+
+		bs.show();
+		g.dispose();
+		
 	}
 	
 	public JFrame getFrame(){

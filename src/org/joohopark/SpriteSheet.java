@@ -7,10 +7,13 @@ import javax.imageio.ImageIO;
 
 public class SpriteSheet {
 
+	
 	private BufferedImage image;
 	
 	public SpriteSheet() throws IOException{
-		image = ImageIO.read(SpriteSheet.class.getResource("/block.png"));
+		
+		image = ImageIO.read(this.getClass().getResource("/block.png"));
+		
 	}
 	
 	public BufferedImage getBlock(int tileType){
