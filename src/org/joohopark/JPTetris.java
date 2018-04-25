@@ -90,6 +90,7 @@ public class JPTetris{
 		for(int i = 4; i < space.tile.length; i++){
 			if(space.rowFilled(i)){
 				System.out.println(i);
+				space.removeRow(i);
 				linesCleared++;
 			}
 		}

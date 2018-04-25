@@ -22,7 +22,7 @@ public class Screen extends Canvas{
 
 	public static final int SCALE = 8 * 3;
 	public static final int WIDTH = 10 * SCALE;
-	public static final int HEIGHT = 24 * SCALE;
+	public static final int HEIGHT = 20 * SCALE;
 	public static final String GAMENAME = "Tetris";
 	
 	public Screen(SpriteSheet tile){
@@ -61,7 +61,7 @@ public class Screen extends Canvas{
 		
 		for(int y = 4; y < 24; y++){
 			for(int x = 0; x < 10; x++){
-				g.drawImage(tile.getBlock(board[y][x]), x * SCALE, (y - 4) * SCALE, SCALE * 8, SCALE * 8, null);
+				g.drawImage(tile.getBlock(board[y][x]), x * SCALE, (y - 4) * SCALE, SCALE, SCALE, null);
 			}
 		}
 

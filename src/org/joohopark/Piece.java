@@ -59,17 +59,10 @@ public class Piece {
 
 	//checks if there is space on the bottom
 	public boolean checkDown(GameBoard board, int yPos){
+		System.out.println(yPos);
 		
-		a: for(int y = height - 1; y >= 0; y++){
-			for(int x = 0; x < width; x++){
-				if(block[y][x] != 0){
-					if(yPos + y == 24){
-						return false;
-					}else{
-						break a;
-					}
-				}
-			}
+		if(yPos + height >= 24){
+			return false;
 		}
 		
 		for(int x = 0; x < width; x++){ //checks for each colum
