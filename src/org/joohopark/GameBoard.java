@@ -60,7 +60,7 @@ public class GameBoard {
 	}
 	
 	public void removeRow(int row){
-		for(int i = row; i > 3; i++){
+		for(int i = row; i > 3; i--){
 			for(int j =0; j < xSIZE; j++){
 				tile[i][j] = tile[i - 1][j];
 			}

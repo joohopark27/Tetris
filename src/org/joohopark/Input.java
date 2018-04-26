@@ -17,14 +17,14 @@ public class Input implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()){
-		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			down = true;
 			break;
-		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			left = true;
 			break;
-		case KeyEvent.VK_D:
-			left = true;
+		case KeyEvent.VK_RIGHT:
+			right = true;
 			break;
 		case KeyEvent.VK_SPACE:
 			space = true;	
@@ -35,14 +35,14 @@ public class Input implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()){
-		case KeyEvent.VK_S:
+		case KeyEvent.VK_DOWN:
 			down = false;
 			break;
-		case KeyEvent.VK_A:
+		case KeyEvent.VK_LEFT:
 			left = false;
 			break;
-		case KeyEvent.VK_D:
-			left = false;
+		case KeyEvent.VK_RIGHT:
+			right = false;
 			break;
 		case KeyEvent.VK_SPACE:
 			space = false;

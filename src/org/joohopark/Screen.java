@@ -30,18 +30,18 @@ public class Screen extends Canvas{
 		this.tile = tile;
 		
 		frame = new JFrame(GAMENAME);
-		this.frame = new JFrame(GAMENAME);
-		this.frame.setSize(WIDTH, HEIGHT );
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setResizable(false);
-		this.frame.setLocationRelativeTo(null);
-		this.frame.setVisible(true);
+		frame = new JFrame(GAMENAME);
+		frame.setSize(WIDTH, HEIGHT );
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		canvas.setMaximumSize(new Dimension(WIDTH, HEIGHT));
 		canvas.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-
+		
 		frame.add(canvas);
 		frame.pack();
 		
